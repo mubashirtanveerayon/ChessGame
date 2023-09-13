@@ -345,6 +345,9 @@ public class GameController implements ActionListener {
                 }
                 text += "[PlyCount \""+String.valueOf(plyCount)+"\"]\n";
                 text += sidePanel.moveListArea.getText();
+                if(!result.equalsIgnoreCase("Continue")){
+                    text += " " + result;
+                }
                 try(BufferedWriter br = new BufferedWriter(new FileWriter(path))){
                     br.write(text);
                 }catch(IOException e){
