@@ -265,11 +265,6 @@ public class GameController implements ActionListener {
                 }
             }
         }else if(src instanceof JRadioButton){
-            if(engine.isSearching()){
-                sidePanel.playAsW.setSelected(playerIsWhite);
-                sidePanel.playAsB.setSelected(!playerIsWhite);
-                return;
-            }
             playerIsWhite = sidePanel.playAsW.isSelected();
             selectedSquareIndex = -1;
             hasPromotion = false;

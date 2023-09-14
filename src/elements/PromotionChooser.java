@@ -1,6 +1,7 @@
 package elements;
 
 import path.Paths;
+import server.util.Constants;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,15 +31,15 @@ public class PromotionChooser extends JFrame{
 
     public void show(boolean playerIsWhite){
         if(playerIsWhite){
-            qButton.setIcon(new ImageIcon(Paths.ASSET_PATH+"Q.png"));
-            nButton.setIcon(new ImageIcon(Paths.ASSET_PATH+"N.png"));
-            bButton.setIcon(new ImageIcon(Paths.ASSET_PATH+"B.png"));
-            rButton.setIcon(new ImageIcon(Paths.ASSET_PATH+"R.png"));
+            qButton.setIcon(new ImageIcon(Paths.getImagePath(Constants.WHITE_QUEEN)));
+            nButton.setIcon(new ImageIcon(Paths.getImagePath(Constants.WHITE_KNIGHT)));
+            bButton.setIcon(new ImageIcon(Paths.getImagePath(Constants.WHITE_BISHOP)));
+            rButton.setIcon(new ImageIcon(Paths.getImagePath(Constants.WHITE_ROOK)));
         }else{
-            qButton.setIcon(new ImageIcon(Paths.ASSET_PATH+"q.png"));
-            nButton.setIcon(new ImageIcon(Paths.ASSET_PATH+"n.png"));
-            bButton.setIcon(new ImageIcon(Paths.ASSET_PATH+"b.png"));
-            rButton.setIcon(new ImageIcon(Paths.ASSET_PATH+"r.png"));
+            qButton.setIcon(new ImageIcon(Paths.getImagePath(Constants.BLACK_QUEEN)));
+            nButton.setIcon(new ImageIcon(Paths.getImagePath(Constants.BLACK_KNIGHT)));
+            bButton.setIcon(new ImageIcon(Paths.getImagePath(Constants.BLACK_BISHOP)));
+            rButton.setIcon(new ImageIcon(Paths.getImagePath(Constants.BLACK_ROOK)));
         }
 
         super.show();
