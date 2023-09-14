@@ -3,6 +3,7 @@ package elements;
 import controller.GameController;
 
 import javax.swing.*;
+import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
@@ -24,17 +25,15 @@ public class SidePanel extends JPanel {
     private void configure() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setPreferredSize(new Dimension(300, 450));
-
-
     }
     private void initComponents() {
         moveListArea = new JTextArea();
         moveListArea.setEditable(false);
-        //moveListArea.setAlignmentX(Component.CENTER_ALIGNMENT);
         moveListArea.setLineWrap(true);
+        moveListArea.setToolTipText("Move list");
 
         JScrollPane scroll = new JScrollPane(moveListArea,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        scroll.setPreferredSize(new Dimension(300,200));
+        scroll.setPreferredSize(new Dimension(250,200));
 
         JPanel topPanel = new JPanel();
         topPanel.setPreferredSize(new Dimension(250,70));
@@ -62,14 +61,14 @@ public class SidePanel extends JPanel {
 
         bottomPanel = new JPanel(new BorderLayout());
         bottomPanel.add(topPanel,BorderLayout.NORTH);
+        bottomPanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 
         JPanel depthPanel = new JPanel();
         depthPanel.setLayout(new BoxLayout(depthPanel,BoxLayout.Y_AXIS));
-        JLabel depthTitle = new JLabel("                             ");
+        JLabel depthTitle = new JLabel("                                       ");
         depthTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         depthPanel.setBorder(BorderFactory.createTitledBorder("Level"));
-        depthPanel.setToolTipText("Increasing level/depth value enables the engine to make more accurate move.However this is achieved at the cost of greatly increased thinking time.");
-        //depthPanel.setBackground(Color.RED);
+        depthPanel.setToolTipText("Increasing level/depth value enables the engine to make more accurate moves.However this is achieved at the cost of greatly increased thinking time.");
 
         depthButtons = new JRadioButton[5];
         ButtonGroup depthButtonGroup = new ButtonGroup();
@@ -87,18 +86,12 @@ public class SidePanel extends JPanel {
         depthButtons[3].setSelected(true);
         depthPanel.add(Box.createVerticalGlue());
 
-
-
-
         bottomPanel.add(depthPanel,BorderLayout.WEST);
 
         JPanel timePanel = new JPanel();
-        timePanel.setLayout(new BoxLayout(timePanel,BoxLayout.Y_AXIS));
-        JLabel timeLabel = new JLabel("         ");
-        timeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        timePanel.setBorder(BorderFactory.createRaisedBevelBorder());
         timePanel.setBorder(BorderFactory.createTitledBorder("Time"));
         timePanel.setToolTipText("The engine will make its move within the specified time, even if the search depth is not reached.");
-        //timePanel.setBackground(Color.BLUE);
 
         five = new JRadioButton();
         seven = new JRadioButton();
@@ -107,7 +100,7 @@ public class SidePanel extends JPanel {
         seven.setText("7 seconds");
         ten = new JRadioButton("10 seconds");
         inf = new JRadioButton("Full depth search");
-        five.setSelected(true);
+        seven.setSelected(true);
 
         ButtonGroup timeButtonGroup = new ButtonGroup();
         timeButtonGroup.add(five);
@@ -116,14 +109,14 @@ public class SidePanel extends JPanel {
         timeButtonGroup.add(inf);
 
         timePanel.add(Box.createVerticalGlue());
-        timePanel.add(timeLabel);
+        //timePanel.add(timeLabel);
         timePanel.add(five);
         timePanel.add(seven);
         timePanel.add(ten);
         timePanel.add(inf);
         timePanel.add(Box.createVerticalGlue());
 
-        bottomPanel.add(timePanel,BorderLayout.EAST);
+        bottomPanel.add(timePanel,BorderLayout.CENTER);
 
 
         add(Box.createVerticalGlue());

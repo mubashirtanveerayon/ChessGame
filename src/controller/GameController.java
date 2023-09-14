@@ -202,6 +202,22 @@ public class GameController implements ActionListener {
                         if(selectedSquareIndex < 0){
                             if(playerIsWhite && engine.cb.turn == Constants.WHITE && engine.cb.board[i][j] != Constants.EMPTY_SQUARE && Character.isUpperCase(engine.cb.board[i][j])) {
                                 selectedSquareIndex = j + i * 8;
+                                ArrayList<String> moves = getMoves(j,i);
+                                if(moves != null) {
+                                    System.out.println(moves.size());
+                                    System.out.println(engine.cb.board[i][j]);
+                                    for (String move : moves) {
+                                        if(move.contains(Constants.KING_SIDE_CASTLING)){
+                                            if (move.contains(Constants.QUEEN_SIDE_CASTLING)) {
+                                                boardPanel.buttons[7][2].setBackground(new Color(30,129,176));
+                                            }else {
+                                                boardPanel.buttons[7][6].setBackground(new Color(30,129,176));
+                                            }
+                                        }else {
+                                            boardPanel.buttons[Integer.parseInt(Character.toString(move.charAt(3)))][Integer.parseInt(Character.toString(move.charAt(2)))].setBackground(new Color(30,129,176));
+                                        }
+                                    }
+                                }
                                 if(i == 1  && engine.cb.board[i][j] == Constants.WHITE_PAWN){
                                     for(String move:engine.mm.getAllMoves()){
                                         if(move.split(Constants.MOVE_SEPARATOR).length == Constants.PROMOTION_MOVE_LENGTH){
@@ -212,6 +228,22 @@ public class GameController implements ActionListener {
                                 }
                             }else if(!playerIsWhite &&engine.cb.turn == Constants.BLACK &&  engine.cb.board[7-i][7-j] != Constants.EMPTY_SQUARE && !Character.isUpperCase(engine.cb.board[7-i][7-j])){
                                 selectedSquareIndex = (7-j)+(7-i) * 8;
+                                ArrayList<String> moves = getMoves(7-j,7-i);
+                                if(moves != null) {
+                                    System.out.println(moves.size());
+                                    System.out.println(engine.cb.board[7-i][7-j]);
+                                    for (String move : moves) {
+                                        if(move.contains(Constants.KING_SIDE_CASTLING)){
+                                            if (move.contains(Constants.QUEEN_SIDE_CASTLING)) {
+                                                boardPanel.buttons[7][5].setBackground(new Color(30,129,176));
+                                            }else{
+                                                boardPanel.buttons[7][1].setBackground(new Color(30,129,176));
+                                            }
+                                        }else {
+                                            boardPanel.buttons[7-Integer.parseInt(Character.toString(move.charAt(3)))][7-Integer.parseInt(Character.toString(move.charAt(2)))].setBackground(new Color(30,129,176));
+                                        }
+                                    }
+                                }
                                 if(i == 1  && engine.cb.board[7-i][7-j] == Constants.BLACK_PAWN){
                                     for(String move:engine.mm.getAllMoves()){
                                         if(move.split(Constants.MOVE_SEPARATOR).length == Constants.PROMOTION_MOVE_LENGTH){
@@ -222,6 +254,7 @@ public class GameController implements ActionListener {
                                 }
                             }
                         }else {
+                            boardPanel.render(engine.cb.board,!playerIsWhite);
                             if(playerIsWhite){
                                 if(j+i*8 != selectedSquareIndex){
                                     String algebric = Util.cvtCoord(selectedSquareIndex)+Util.cvtCoord(j+i*8);
@@ -260,6 +293,7 @@ public class GameController implements ActionListener {
                             }
                             selectedSquareIndex = -1;
                             hasPromotion = false;
+
                         }
                     }
                 }
@@ -365,6 +399,11 @@ public class GameController implements ActionListener {
         }
     }
 
+
+    private ArrayList<String> getMoves(final int file,final int rank){
+
+        return engine.mm.generateMove(file,rank);
+    }
 
     private String getResult(){
         if(engine.mm.getAllMoves().isEmpty()) {
