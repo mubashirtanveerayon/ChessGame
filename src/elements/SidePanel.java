@@ -25,17 +25,16 @@ public class SidePanel extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setPreferredSize(new Dimension(300, 450));
 
-        add(Box.createVerticalGlue());
-        add(moveListArea);
 
-        add(bottomPanel);
-        add(Box.createVerticalGlue());
     }
     private void initComponents() {
         moveListArea = new JTextArea();
         moveListArea.setEditable(false);
-        moveListArea.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //moveListArea.setAlignmentX(Component.CENTER_ALIGNMENT);
         moveListArea.setLineWrap(true);
+
+        JScrollPane scroll = new JScrollPane(moveListArea,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setPreferredSize(new Dimension(300,200));
 
         JPanel topPanel = new JPanel();
         topPanel.setPreferredSize(new Dimension(250,70));
@@ -125,6 +124,13 @@ public class SidePanel extends JPanel {
         timePanel.add(Box.createVerticalGlue());
 
         bottomPanel.add(timePanel,BorderLayout.EAST);
+
+
+        add(Box.createVerticalGlue());
+        add(scroll);
+
+        add(bottomPanel);
+        add(Box.createVerticalGlue());
 
     }
 
