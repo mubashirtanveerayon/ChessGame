@@ -330,8 +330,15 @@ public class GameController implements ActionListener {
                     depthButton.setEnabled(false);
                 }
             }else if(src == sidePanel.inf){
+                boolean depthSelected = false;
                 for(JRadioButton depthButton:sidePanel.depthButtons){
                     depthButton.setEnabled(true);
+                    if(depthButton.isSelected()){
+                        depthSelected = true;
+                    }
+                }
+                if(!depthSelected){
+                    sidePanel.depthButtons[2].setSelected(true);
                 }
             }else {
 
